@@ -1,0 +1,73 @@
+/******************************************************************************
+Binary search tree
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define len 6
+
+typedef struct Node{
+    int val;
+    Node* left;
+    Node* right;
+}BST;
+int BstSearch(int num,BST* head)
+{
+    if (head==NULL)
+     return -1;
+     else if (head->val == num)
+     return 1;
+     else if(num>head->val)
+     BstSearch(num,head->right);
+     else 
+    BstSearch(num,head->left);
+}
+
+// A utility function to create a new BST node
+BST *newNode(int item)
+{
+	BST *temp = (BST *)malloc(sizeof(BST));
+	temp->val = item;
+	temp->left = temp->right = NULL;
+	return temp;
+}
+/* A utility function to insert a new node with given key in BST */
+BST* insert(BST* node, int key)
+{
+	/* If the tree is empty, return a new node */
+	if (node == NULL) return newNode(key);
+
+	/* Otherwise, recur down the tree */
+	if (key < node->val)
+		node->left = insert(node->left, key);
+	else if (key > node->val)
+		node->right = insert(node->right, key); 
+
+	/* return the (unchanged) node pointer */
+	return node;
+}
+
+BST* head = (BST*)malloc(sizeof(BST));
+
+int main()
+{
+head->val = 20;
+head->left = NULL;
+head->right = NULL;
+insert(head,30);
+insert(head,25);
+insert(head,1);
+int ret = BstSearch(1,head);
+{
+    if (ret>0) 
+    printf("found");
+    else
+    printf("not found");
+    
+}
+
+}
+
+
